@@ -11,7 +11,6 @@ const App = () => {
   const [taskTitle,setTaskTitle] = useState("")
   const [tasks,setTasks] = useState([])
   const screenWidth = Dimensions.get('window').width
-  //
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [taskSelected, setTaskSelected] = useState(null); 
 
@@ -39,42 +38,20 @@ const App = () => {
     setTaskTitle(t)
   }
 
-  //const onHandlerModaDelete = (task) => {
-    /*
-    Alert.alert(
-       'Confirmación de eliminación',
-       `¿Estás seguro de que quieres eliminar la tarea: ${task.title}?`,
-       [
-          {text: 'Sí', onPress: () => deleteTask(task)},
-          {text: 'No' , style: 'cancel'},
-       ],
-       { cancelable: false }
-    )*/
-
-    /*
-    <CustomAlert
-    title='Confirmación de eliminación'
-    message={`¿Estás seguro de que quieres eliminar la tarea: ${task.title}?`}
-    onConfirm={deleteTask}
-    //onCancel={handleCancel}
-    visible={isAlertVisible}
-  />*/
-//}
   const onHandlerModaDelete = (task) => {
-    //ACA ENBTRA AL USAR LA X
-    setTaskSelected(task); // Guarda la tarea seleccionada para su posterior eliminación
-    setIsAlertVisible(true); // Muestra la alerta personalizada
+    setTaskSelected(task);
+    setIsAlertVisible(true);
   };
 
   const handleConfirm = () => {
     if (taskSelected) {
-      deleteTask(taskSelected); // Elimina la tarea seleccionada
+      deleteTask(taskSelected);
     }
-    setIsAlertVisible(false); // Oculta la alerta personalizada
+    setIsAlertVisible(false);
   };
 
   const handleCancel = () => {
-    setIsAlertVisible(false); // Oculta la alerta personalizada
+    setIsAlertVisible(false);
   };
    
    
