@@ -1,4 +1,4 @@
-import { StyleSheet, View, FlatList} from 'react-native'
+import { StyleSheet, View,FlatList} from 'react-native'
 import React from 'react'
 import CartTaskList from './CartTaskList'
 

@@ -5,11 +5,7 @@ import AddTask from './src/components/AddTask'
 import ListTasks from './src/components/ListTasks'
 
 const App = () => {
-
-  const [modalVisible, setModalVisible] = useState(false)
-  const [taskSelected , setTaskSelected] = useState({})
   const [taskTitle,setTaskTitle] = useState("")
-  const [taskDescripcion,setTaskDescription] = useState("")
   const [tasks,setTasks] = useState([])
   const screenWidth = Dimensions.get('window').width
 
@@ -25,21 +21,15 @@ const App = () => {
       updateAt: new Date().toLocaleString(),
       completed:false,
       title:taskTitle.trim(),
-      description:taskDescripcion
     }
 
     setTasks([...tasks,newTask])
     setTaskTitle("")
-    setTaskDescription("")
     Keyboard.dismiss()
   }
 
   const onHandlerTitle = (t) =>{
     setTaskTitle(t)
-  }
-
-  const onHandlerDescription = (t) => {
-    setTaskDescription(t)
   }
 
   const onHandlerModaDelete = (task) => {
@@ -70,8 +60,6 @@ const App = () => {
     <View style={styles.container} >
       <AddTask taskTitle= {taskTitle}
                onHandlerTitle= {onHandlerTitle}
-               taskDescripcion = {taskDescripcion}
-               onHandlerDescription = {onHandlerDescription}
                addTask = {addTask}
       />
       <ListTasks 
