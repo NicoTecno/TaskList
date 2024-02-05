@@ -4,10 +4,17 @@ import uuid from 'react-native-uuid'
 import AddTask from './src/components/AddTask'
 import ListTasks from './src/components/ListTasks'
 
+//
+import CustomAlert from './src/components/AlertPrimary'
+
 const App = () => {
   const [taskTitle,setTaskTitle] = useState("")
   const [tasks,setTasks] = useState([])
   const screenWidth = Dimensions.get('window').width
+  //
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [taskSelected, setTaskSelected] = useState(null); 
+
 
   const addTask = () =>{
 
@@ -32,7 +39,8 @@ const App = () => {
     setTaskTitle(t)
   }
 
-  const onHandlerModaDelete = (task) => {
+  //const onHandlerModaDelete = (task) => {
+    /*
     Alert.alert(
        'Confirmación de eliminación',
        `¿Estás seguro de que quieres eliminar la tarea: ${task.title}?`,
@@ -41,8 +49,36 @@ const App = () => {
           {text: 'No' , style: 'cancel'},
        ],
        { cancelable: false }
-    )
-   }
+    )*/
+
+    /*
+    <CustomAlert
+    title='Confirmación de eliminación'
+    message={`¿Estás seguro de que quieres eliminar la tarea: ${task.title}?`}
+    onConfirm={deleteTask}
+    //onCancel={handleCancel}
+    visible={isAlertVisible}
+  />*/
+//}
+  const onHandlerModaDelete = (task) => {
+    //ACA ENBTRA AL USAR LA X
+    setTaskSelected(task); // Guarda la tarea seleccionada para su posterior eliminación
+    setIsAlertVisible(true); // Muestra la alerta personalizada
+  };
+
+  const handleConfirm = () => {
+    if (taskSelected) {
+      deleteTask(taskSelected); // Elimina la tarea seleccionada
+    }
+    setIsAlertVisible(false); // Oculta la alerta personalizada
+  };
+
+  const handleCancel = () => {
+    setIsAlertVisible(false); // Oculta la alerta personalizada
+  };
+   
+   
+
    
    const deleteTask = (taskToDelete) => {
     setTasks(tasks.filter(task => task.id !== taskToDelete.id));
@@ -68,6 +104,15 @@ const App = () => {
         screenWidth={screenWidth}
         updateTaskCompleted={updateTaskCompleted}
       />
+       <CustomAlert
+        isVisible={isAlertVisible}
+        title="Confirmación de eliminación"
+        message={`¿Estás seguro de que quieres eliminar la tarea: ${taskSelected?.title}?`}
+        onConfirm={handleConfirm}
+        onCancel={handleCancel}
+        visible={isAlertVisible}
+      />
+
   </View>
   )
 }
