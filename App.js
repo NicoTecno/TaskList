@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import {View,StyleSheet ,Dimensions ,Keyboard, Alert} from 'react-native'
 import uuid from 'react-native-uuid'
-import ModalDeleteTask from './src/components/ModalDeleteTask'
 import AddTask from './src/components/AddTask'
 import ListTasks from './src/components/ListTasks'
 
@@ -44,14 +43,21 @@ const App = () => {
   }
 
   const onHandlerModaDelete = (task) => {
-    setTaskSelected(task)
-    setModalVisible(!modalVisible)
-  }
-
-  const deleteTask = () => {
-    setTasks(tasks.filter(task => task.id != taskSelected.id ))
-    setModalVisible(!modalVisible)
-  }
+    Alert.alert(
+       'Confirmación de eliminación',
+       `¿Estás seguro de que quieres eliminar la tarea: ${task.title}?`,
+       [
+          {text: 'Sí', onPress: () => deleteTask(task)},
+          {text: 'No' , style: 'cancel'},
+       ],
+       { cancelable: false }
+    )
+   }
+   
+   const deleteTask = (taskToDelete) => {
+    setTasks(tasks.filter(task => task.id !== taskToDelete.id));
+   }
+   
 
   const updateTaskCompleted = (id) => {
     setTasks(tasks.map(task =>{
@@ -73,12 +79,6 @@ const App = () => {
         onHandlerModaDelete={onHandlerModaDelete}
         screenWidth={screenWidth}
         updateTaskCompleted={updateTaskCompleted}
-      />
-      <ModalDeleteTask  
-         modalVisible={modalVisible}
-         taskSelected={taskSelected}
-         deleteTask={deleteTask}
-         onHandlerModaDelete={onHandlerModaDelete}
       />
   </View>
   )

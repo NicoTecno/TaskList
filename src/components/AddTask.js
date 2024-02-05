@@ -3,8 +3,6 @@ import ButtonPrimary from './ButtonPrimary'
 
 const AddTask = ({taskTitle,
                   onHandlerTitle,
-                  taskDescripcion,
-                  onHandlerDescription,
                   addTask}) => {
   return (
     <View style={styles.container}>
@@ -19,17 +17,6 @@ const AddTask = ({taskTitle,
             maxLength={12}
             style={styles.input}
             />
-            {/* 
-        <TextInput 
-        value={taskDescripcion} 
-        onChangeText={onHandlerDescription}  
-        placeholder='Ingresar descripcion' 
-        placeholderTextColor="white"
-        multiline
-        numberOfLines={4}
-        maxLength={100}
-        style={styles.input}/>
-      */}
         <ButtonPrimary title="+" onPress={addTask}/>
       </View>
     </View>
